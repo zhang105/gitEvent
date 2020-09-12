@@ -30,6 +30,8 @@ $(function() {
         })
     }
 
+    window.getUserInfo = getUserInfo
+
     //渲染头像
     function renderAvatar(user) {
         // console.log(user);

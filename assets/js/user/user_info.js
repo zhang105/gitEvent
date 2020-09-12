@@ -49,7 +49,6 @@ $(function() {
                 // 首页上欢迎后面的用户名根据更改的信息改变
                 window.parent.getUserInfo()
 
-
             }
         })
     })
