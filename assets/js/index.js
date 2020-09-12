@@ -15,17 +15,18 @@ $(function() {
                 }
                 renderAvatar(res.data)
             },
+            // 控制用户的访问权限  后面也会调用这个方法,抽取到baseapi中
             // 不论请求数据成功或者失败都会调用complete
-            complete: function(res) {
-                console.log(res);
-                if (res.responseJSON.status === 1 && res.responseJSON.message === '身份认证失败！') {
-                    // 强制清除内地缓存内容
-                    localStorage.removeItem('token')
-                        // 强制调转到登录页面
-                    location.href = "/login.html"
-                }
+            // complete: function(res) {
+            //     console.log(res);
+            //     if (res.responseJSON.status === 1 && res.responseJSON.message === '身份认证失败！') {
+            //         // 强制清除内地缓存内容
+            //         localStorage.removeItem('token')
+            //             // 强制调转到登录页面
+            //         location.href = "/login.html"
+            //     }
 
-            }
+            // }
         })
     }
 
