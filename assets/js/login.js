@@ -36,7 +36,7 @@ $(function() {
                 password: $('#form_reg [name=password]').val()
             },
             success: function(res) {
-                console.log(res);
+                // console.log(res);
                 if (res.status !== 0) {
                     return layer.msg(res.message);
                 }
