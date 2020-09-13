@@ -1,5 +1,6 @@
 $(function() {
     var layer = layui.layer
+    var form = layui.form
 
     initArtCateList()
         // 后台获取数据
@@ -31,6 +32,7 @@ $(function() {
         });
     })
 
+    // 添加文章分类
     $('body').on('submit', '#form-add', function(e) {
         e.preventDefault()
         $.ajax({
@@ -50,6 +52,52 @@ $(function() {
 
     })
 
+    // 修改文章分类
+    var indexEdit = null
+    $('body').on('click', '.btn-edit', function() {
 
+        indexEdit = layer.open({
+            type: 1,
+            area: ['500px', '300px'],
+            title: '修改文章分类',
+            content: $('#dialog-edit').html()
+        })
 
+        var id = $(this).attr('data-id')
+
+        $.ajax({
+            url: '/my/article/cates/' + id,
+            method: 'GET',
+            success: function(res) {
+                console.log(res);
+                if (res.status !== 0) {
+                    return layer.msg(res.message)
+                }
+                form.val('edit-form', res.data)
+
+            }
+        })
+
+    })
+
+    // 确认修改
+    $('body').on('submit', '#form-edit', function(e) {
+        e.preventDefault()
+
+        $.ajax({
+            url: '/my/article/updatecate',
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function(res) {
+                if (res.status !== 0) {
+                    return layer.msg(res.message)
+                }
+                layer.msg(res.message)
+
+                initArtCateList()
+
+                layer.close(indexAdd)
+            }
+        })
+    })
 })
