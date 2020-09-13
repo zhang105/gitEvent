@@ -100,4 +100,24 @@ $(function() {
             }
         })
     })
+
+    // 删除
+    $('body').on('click', '#btn-delete', function() {
+        var id = $(this).attr('data-id')
+        layer.confirm('确认删除?', { icon: 3, title: '提示' }, function(index) {
+
+            $.ajax({
+                url: '/my/article/deletecate/' + id,
+                method: 'GET',
+                success: function(res) {
+                    if (res.status !== 0) {
+                        return layer.msg(res.massage)
+                    }
+                    layer.msg('删除成功')
+                    initArtCateList()
+                    layer.close(index)
+                }
+            })
+        })
+    })
 })
