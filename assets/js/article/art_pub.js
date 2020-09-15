@@ -64,7 +64,7 @@ $(function() {
     })
 
     $('#form-pub').on('submit', function(e) {
-        e.preventDefault
+        e.preventDefault()
         var fd = new FormData($(this)[0])
             // 将文章的发布状态，存到 fd 中
         fd.append('state', art_state)
@@ -94,7 +94,7 @@ $(function() {
             contentType: false,
             processData: false,
             success: function(res) {
-                console.log(res);
+                // console.log(res);
 
                 if (res.status !== 0) {
                     return layer.msg(res.message)
