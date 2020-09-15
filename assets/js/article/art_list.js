@@ -124,7 +124,36 @@ $(function() {
 
     }
 
+    // 删除
+    $('tbody').on('click', '.btn-delete', function() {
+        // 获取到id
+        var id = $(this).attr('data-id')
+            // 点击删除按钮时,获取到当前页面有几个删除按钮(有几条文章)
+        var len = $('.btn-delete').length
 
+        layer.confirm('确认删除?', { icon: 3, title: '提示' }, function(index) {
+            $.ajax({
+                url: `/my/article/delete/${id}`,
+                method: 'GET',
+                success: function(res) {
+                    if (res.status !== 0) {
+                        return layer.msg(res.message)
+                    }
+                    layer.msg('删除文章成功')
+
+                    // 按钮个数大于1时,不做处理
+                    //如果当点击删除按钮时,按钮个数只有1个,则表示当删除这个时,当前页面没有文章,让页码值-1
+                    if (len === 1) {
+                        q.pagenum = q.pagenum === 1 ? 1 : pagenum - 1
+                    }
+                    initTable()
+                }
+            })
+
+            layer.close(index);
+        })
+
+    })
 
 
 
